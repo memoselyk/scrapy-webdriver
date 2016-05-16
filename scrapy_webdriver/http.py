@@ -36,7 +36,7 @@ class WebdriverResponse(TextResponse):
     def __init__(self, url, webdriver, **kwargs):
         kwargs.setdefault('body', webdriver.page_source)
         kwargs.setdefault('encoding', 'utf-8')
-        super(WebdriverResponse, self).__init__(url, **kwargs)
+        super(WebdriverResponse, self).__init__(webdriver.current_url, **kwargs)
         self.actions = ActionChains(webdriver)
         self.webdriver = webdriver
 
