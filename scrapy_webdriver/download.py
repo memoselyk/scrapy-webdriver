@@ -39,8 +39,11 @@ class WebdriverDownloadHandler(object):
     @inthread
     def _download_request(self, request, spider):
         """Download a request URL using webdriver."""
-        logging.debug(u'Downloading %s with webdriver' % request.url)
+        logging.warn(u'Downloading %s with webdriver' % request.url)
         request.manager.webdriver.get(request.url)
+        url2 = request.manager.webdriver.current_url
+        if url2 != request.url:
+            logging.warn(u'URL mistmatch at %s with webdriver' % url2)
         return WebdriverResponse(request.url, request.manager.webdriver)
 
     @inthread
